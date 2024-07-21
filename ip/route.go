@@ -190,6 +190,8 @@ type RouteEntry struct {
 	InIfindex  int
 	OutIfindex int
 	Gateway    net.IP
+	Via        net.IP
+	Dev        string
 	Table      RouteTable
 	Priority   int
 	PrefSrc    net.IP
@@ -282,6 +284,8 @@ func parseRouteMsg(msg *netlink.Message) (*RouteEntry, bool, error) {
 			e.OutIfindex = int(ad.Uint32())
 		case unix.RTA_GATEWAY:
 			e.Gateway = net.IP(ad.Bytes())
+		case unix.RTA_VIA:
+			e.Via = net.IP(ad.Bytes())
 		case unix.RTA_PRIORITY:
 			e.Priority = int(ad.Uint32())
 		case unix.RTA_PREFSRC:
@@ -292,6 +296,9 @@ func parseRouteMsg(msg *netlink.Message) (*RouteEntry, bool, error) {
 			e.Table = RouteTable(ad.Uint32())
 		case unix.RTA_PREF:
 			e.Pref = RoutePref(ad.Uint8())
+		case unix.RTA_CACHEINFO:
+		default:
+			fmt.Printf("ad.Type(%d): %q\n", ad.Type(), netlinkTypeToString(ad.Type()))
 		}
 	}
 
@@ -299,5 +306,74 @@ func parseRouteMsg(msg *netlink.Message) (*RouteEntry, bool, error) {
 		return &e, false, err
 	}
 
+	if e.OutIfindex != 0 {
+		ifi, err := net.InterfaceByIndex(e.OutIfindex)
+		if err != nil {
+			return &e, true, err
+		}
+		e.Dev = ifi.Name
+	}
+
 	return &e, true, nil
+}
+
+func netlinkTypeToString(t uint16) string {
+	switch t {
+	case unix.RTA_UNSPEC:
+		return "RTA_UNSPEC"
+	case unix.RTA_DST:
+		return "RTA_DST"
+	case unix.RTA_SRC:
+		return "RTA_SRC"
+	case unix.RTA_IIF:
+		return "RTA_IIF"
+	case unix.RTA_OIF:
+		return "RTA_OIF"
+	case unix.RTA_GATEWAY:
+		return "RTA_GATEWAY"
+	case unix.RTA_PRIORITY:
+		return "RTA_PRIORITY"
+	case unix.RTA_PREFSRC:
+		return "RTA_PREFSRC"
+	case unix.RTA_METRICS:
+		return "RTA_METRICS"
+	case unix.RTA_MULTIPATH:
+		return "RTA_MULTIPATH"
+	case unix.RTA_FLOW:
+		return "RTA_FLOW"
+	case unix.RTA_CACHEINFO:
+		return "RTA_CACHEINFO"
+	case unix.RTA_TABLE:
+		return "RTA_TABLE"
+	case unix.RTA_MARK:
+		return "RTA_MARK"
+	case unix.RTA_MFC_STATS:
+		return "RTA_MFC_STATS"
+	case unix.RTA_VIA:
+		return "RTA_VIA"
+	case unix.RTA_NEWDST:
+		return "RTA_NEWDST"
+	case unix.RTA_PREF:
+		return "RTA_PREF"
+	case unix.RTA_ENCAP_TYPE:
+		return "RTA_ENCAP_TYPE"
+	case unix.RTA_ENCAP:
+		return "RTA_ENCAP"
+	case unix.RTA_EXPIRES:
+		return "RTA_EXPIRES"
+	case unix.RTA_PAD:
+		return "RTA_PAD"
+	case unix.RTA_UID:
+		return "RTA_UID"
+	case unix.RTA_TTL_PROPAGATE:
+		return "RTA_TTL_PROPAGATE"
+	case unix.RTA_IP_PROTO:
+		return "RTA_IP_PROTO"
+	case unix.RTA_SPORT:
+		return "RTA_SPORT"
+	case unix.RTA_DPORT:
+		return "RTA_DPORT"
+	default:
+		return fmt.Sprintf("ad.Type: %d", t)
+	}
 }
