@@ -7,10 +7,11 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/Asphaltt/go-iproute2"
-	"github.com/Asphaltt/go-iproute2/internal/etc"
 	"github.com/mdlayher/netlink"
 	"golang.org/x/sys/unix"
+
+	"github.com/ezdev128/go-iproute2"
+	"github.com/ezdev128/go-iproute2/internal/etc"
 )
 
 // LinkRxErrors is the rx error statistics of the link.

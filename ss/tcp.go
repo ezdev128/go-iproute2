@@ -3,7 +3,7 @@ package ss
 import (
 	"syscall"
 
-	"github.com/Asphaltt/go-iproute2"
+	"github.com/ezdev128/go-iproute2"
 )
 
 // ListTcp4Conns retrieves all tcp connections from kernel.

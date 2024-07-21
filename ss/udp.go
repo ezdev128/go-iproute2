@@ -3,7 +3,7 @@ package ss
 import (
 	"syscall"
 
-	"github.com/Asphaltt/go-iproute2"
+	"github.com/ezdev128/go-iproute2"
 )
 
 // ListUdp4Conns retrieves all Udp sockets from kernel.

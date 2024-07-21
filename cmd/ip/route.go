@@ -5,7 +5,7 @@ import (
 	"net"
 	"strings"
 
-	"github.com/Asphaltt/go-iproute2/ip"
+	"github.com/ezdev128/go-iproute2/ip"
 	"github.com/spf13/cobra"
 	"golang.org/x/sys/unix"
 )

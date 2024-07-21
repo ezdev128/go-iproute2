@@ -6,7 +6,7 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/Asphaltt/go-iproute2/ip"
+	"github.com/ezdev128/go-iproute2/ip"
 	"github.com/spf13/cobra"
 )
 

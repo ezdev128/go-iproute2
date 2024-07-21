@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/Asphaltt/go-iproute2/ss"
+	"github.com/ezdev128/go-iproute2/ss"
 )
 
 func showSummary() {

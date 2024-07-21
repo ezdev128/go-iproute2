@@ -5,7 +5,7 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/Asphaltt/go-iproute2"
+	"github.com/ezdev128/go-iproute2"
 	"github.com/mdlayher/netlink"
 )
 

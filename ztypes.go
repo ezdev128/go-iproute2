@@ -200,7 +200,7 @@ func (s NudState) String() string {
 }
 
 // copied from src/cmd/vendor/golang.org/x/sys/unix/ztypes_linux.go
-// TODO(Asphaltt): use ztypes_linux.go instead
+// TODO: use ztypes_linux.go instead
 const (
 	IFLA_EXT_MASK = 0x1d
 )

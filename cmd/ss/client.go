@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/Asphaltt/go-iproute2"
-	"github.com/Asphaltt/go-iproute2/ss"
+	"github.com/ezdev128/go-iproute2"
+	"github.com/ezdev128/go-iproute2/ss"
 	"github.com/mdlayher/netlink"
 )
 
