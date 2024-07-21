@@ -190,6 +190,8 @@ type RouteEntry struct {
 	InIfindex  int
 	OutIfindex int
 	Gateway    net.IP
+	Via        net.IP
+	Dev        string
 	Table      RouteTable
 	Priority   int
 	PrefSrc    net.IP
@@ -282,6 +284,8 @@ func parseRouteMsg(msg *netlink.Message) (*RouteEntry, bool, error) {
 			e.OutIfindex = int(ad.Uint32())
 		case unix.RTA_GATEWAY:
 			e.Gateway = net.IP(ad.Bytes())
+		case unix.RTA_VIA:
+			e.Via = net.IP(ad.Bytes())
 		case unix.RTA_PRIORITY:
 			e.Priority = int(ad.Uint32())
 		case unix.RTA_PREFSRC:
@@ -297,6 +301,14 @@ func parseRouteMsg(msg *netlink.Message) (*RouteEntry, bool, error) {
 
 	if err = ad.Err(); err != nil {
 		return &e, false, err
+	}
+
+	if e.OutIfindex != 0 {
+		ifi, err := net.InterfaceByIndex(e.OutIfindex)
+		if err != nil {
+			return &e, true, err
+		}
+		e.Dev = ifi.Name
 	}
 
 	return &e, true, nil
