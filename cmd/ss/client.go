@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/mdlayher/netlink"
+
 	"github.com/ezdev128/go-iproute2"
 	"github.com/ezdev128/go-iproute2/ss"
-	"github.com/mdlayher/netlink"
 )
 
 type client struct {

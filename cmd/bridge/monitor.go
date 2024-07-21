@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/ezdev128/go-iproute2/bridge"
 	"github.com/spf13/cobra"
+
+	"github.com/ezdev128/go-iproute2/bridge"
 )
 
 func init() {

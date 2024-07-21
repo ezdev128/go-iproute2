@@ -4,8 +4,9 @@ import (
 	"net"
 	"unsafe"
 
-	"github.com/ezdev128/go-iproute2"
 	"github.com/mdlayher/netlink"
+
+	"github.com/ezdev128/go-iproute2"
 )
 
 // FdbActionType is the type for the fdb entry's action.

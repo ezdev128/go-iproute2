@@ -6,10 +6,11 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/ezdev128/go-iproute2"
-	"github.com/ezdev128/go-iproute2/internal/etc"
 	"github.com/mdlayher/netlink"
 	"golang.org/x/sys/unix"
+
+	"github.com/ezdev128/go-iproute2"
+	"github.com/ezdev128/go-iproute2/internal/etc"
 )
 
 type RouteType int

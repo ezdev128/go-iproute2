@@ -5,8 +5,9 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/ezdev128/go-iproute2"
 	"github.com/mdlayher/netlink"
+
+	"github.com/ezdev128/go-iproute2"
 )
 
 // A NeighEntry contains information for the arp records from kernel.

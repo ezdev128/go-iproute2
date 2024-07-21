@@ -3,9 +3,10 @@ package main
 import (
 	"fmt"
 
-	"github.com/ezdev128/go-iproute2"
 	"github.com/mdlayher/netlink"
 	"github.com/spf13/cobra"
+
+	"github.com/ezdev128/go-iproute2"
 )
 
 var cli client

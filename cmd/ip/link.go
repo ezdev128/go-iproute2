@@ -5,9 +5,10 @@ import (
 	"net"
 	"strings"
 
-	"github.com/ezdev128/go-iproute2/ip"
 	"github.com/spf13/cobra"
 	"golang.org/x/sys/unix"
+
+	"github.com/ezdev128/go-iproute2/ip"
 )
 
 func init() {

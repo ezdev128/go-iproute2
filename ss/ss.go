@@ -4,8 +4,9 @@ import (
 	"net"
 	"syscall"
 
-	"github.com/ezdev128/go-iproute2"
 	"github.com/mdlayher/netlink"
+
+	"github.com/ezdev128/go-iproute2"
 )
 
 // A Client can manipulate ss netlink interface.
